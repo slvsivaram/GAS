@@ -1,0 +1,230 @@
+function qtyentry(){
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sht = ss.getSheetByName("Dashboard");
+  //sht.getRange("E12").activate();
+//=========================================    
+  var ra = sht.getRange("D2").getValue();
+  var loc = sht.getRange("D4").getValue();
+  var sh = sht.getRange("D6").getValue();
+  var item = sht.getRange("D8").getValue(); 
+  var qty = sht.getRange("D10").getValue();
+  var itemnext = sht.getRange("R1").getValue();
+//==============================================  
+  if (qty==""){
+  Browser.msgBox( 'EnterQty');
+  return;
+  }
+  
+  switch(sh){
+   case 'FFS' : 
+   var tab =ss.getSheetByName('FFS');
+   break;
+  
+   case 'SH-04': 
+   var tab =ss.getSheetByName("Cabling");
+   break;
+     
+   case 'SH-14': 
+   var tab =ss.getSheetByName("Lifts");
+   break;
+   
+   case 'SH-19': 
+   case 'SH-20':   
+   var tab =ss.getSheetByName("DGsets");
+   break;
+   
+   case 'SH-15': 
+   case 'SH-16': 
+   case 'SH-17':
+   case 'SH-18':
+   case 'SH-21': 
+   case 'SH-03':   
+   var tab =ss.getSheetByName("Transformers");
+   break;   
+  
+   case 'SH-10': 
+   var tab =ss.getSheetByName("10-FireAlarm");
+   break;
+   
+   case 'SH-22': 
+   var tab =ss.getSheetByName("Pumping");
+   break;   
+  
+   case 'SH-05': 
+   case 'SH-06': 
+   case 'SH-08':
+   case 'SH-09':   
+   case 'SH-11':
+   case 'SH-12': 
+   case 'SH-13':    
+   case 'SH-23':   
+   var tab =ss.getSheetByName("Misc");
+   break;  
+   
+   case 'SH-19': 
+   case 'SH-20':   
+   var tab =ss.getSheetByName("DGsets");
+   break;  
+      
+   
+   case 'SH-01': 
+   var ss1 = SpreadsheetApp.openById("11OKvlghwe_7BaeLapwXRfRrV2utS6QIQUBryv-WD_Ws");
+   var tab =ss1.getSheetByName("EI");
+   break;   
+   
+   case 'SH-07':   
+   var ss1 = SpreadsheetApp.openById("11OKvlghwe_7BaeLapwXRfRrV2utS6QIQUBryv-WD_Ws");
+   var tab =ss1.getSheetByName("FixturesFans");   
+   break;
+      
+   case 'HVAC-A':   
+   var ss2 = SpreadsheetApp.openById("1rtrkhtxIU_5xaLHkdg_rcvw1g6YFfNKHE-e6HF-M1so");
+   var tab =ss2.getSheetByName("HVAC-A");   
+   break;  
+      
+   case 'HVAC-B':   
+   var ss2 = SpreadsheetApp.openById("1rtrkhtxIU_5xaLHkdg_rcvw1g6YFfNKHE-e6HF-M1so");
+   var tab =ss2.getSheetByName("HVAC-B");   
+   break; 
+      
+   case 'HVAC-C':   
+   var ss2 = SpreadsheetApp.openById("1rtrkhtxIU_5xaLHkdg_rcvw1g6YFfNKHE-e6HF-M1so");
+   var tab =ss2.getSheetByName("HVAC-C");   
+   break;   
+      
+   case 'HVAC-D':   
+   var ss2 = SpreadsheetApp.openById("1rtrkhtxIU_5xaLHkdg_rcvw1g6YFfNKHE-e6HF-M1so");
+   var tab =ss2.getSheetByName("HVAC-D");   
+   break; 
+      
+   case 'SH-02': 
+   var ss3 = SpreadsheetApp.openById("1fTGLhG3Oy7KgehdLKXMf2Sq9IL4H91bo6HlrshYuAKI");
+   var tab =ss3.getSheetByName("MVpanels");
+   break;  
+  }  
+//=====================================================    
+  var lrow = tab.getLastRow();
+  Logger.log (lrow);
+  tab.getRange("A3:A"+lrow).setNumberFormat("@");
+  var itemfind = tab.getRange("A3:A"+lrow).getValues();
+  tab.getRange("A3:A"+lrow).setNumberFormat("@");
+  Logger.log(itemnext);
+  var j=0;
+  var m=0;
+  for (var i=0;i<=itemfind.length;i++){
+  
+   
+    if ( itemfind[i]==item){
+      
+      j = i+3; 
+      Logger.log ("j="+j);
+      
+          
+    }  
+  }
+   if(itemnext=="last"){
+   m=lrow;
+   //break;
+  }    
+    else{
+    for (var i=j+1;i<=itemfind.length;i++){   
+      
+  
+      
+      if(itemfind[i]==itemnext ){
+       Logger.log(itemfind[i]);        
+       m = i+3; 
+      
+      Logger.log ("m="+m);
+      break;
+      }
+    }
+      
+    }
+   
+  
+ 
+//============================  
+  
+//  
+//  for ( var l=j-3;l<=m-3;l++){
+// 
+//    var subitem = [];
+//    subitem[l]=tab.getRange("A"+l).getValue();
+//  }  
+  var k=0;
+  
+  for ( var l=j-3;l<=m-3;l++){
+    if (itemfind[l]==loc){ 
+      //Logger.log("j="+j);
+      //Logger.log("m="+m);
+      //Logger.log(l);
+      
+      
+      Logger.log("locfound"+itemfind[l]);
+      
+      k = l+3;
+      break;
+      
+    }
+  }
+  
+   
+   if (k==0){ 
+      
+        tab.insertRowAfter(j);
+        var b = j+1;
+        tab.getRange("A"+b).setValue(loc);
+        var c=tab.getMaxColumns();
+        
+        tab.getRange(b,1,1,c).setBackground("white");
+        
+        tab.getRange("B"+j).copyTo(tab.getRange("B"+b) );
+        var f= tab.getRange("B"+j).getFormulaR1C1();
+        tab.getRange("B"+b).setFormulaR1C1(f);
+        
+        
+        var k = j+1;
+        //break;
+      
+    
+    
+    }
+      
+  
+  
+  
+     
+    
+
+   
+
+    
+  
+   Logger.log("k="+k);
+//  if (k==0){
+//    Browser.msgBox( 'Location not found');
+//  }
+  
+  //tab.getRange(k,ra+2).activate();
+  var x = tab.getRange(k,ra+2).getFormula() ;
+  sht.getRange("G10").setFormula(x);
+  Logger.log(x);
+  
+  //tab.getRange(k,ra+2).setFormula( "="+x+"+"+qty);
+  tab.getRange(k,ra+2).setFormula( x+"+"+qty);
+  tab.getRange(k,ra+2).setBackgroundRGB(250, 120, 120);
+  var y = tab.getRange(k,ra+2).getFormula() ;
+   
+   sht.getRange("I10").setFormula(qty);
+   sht.getRange("K10").setFormula(y);
+   sht.getRange("D10").setValue(0);
+    //sht.getRange("D8").setValue("");
+    
+  
+  sht.getRange('D8').activate();
+  Browser.msgBox( 'Data updation successful');
+
+
+
+}
