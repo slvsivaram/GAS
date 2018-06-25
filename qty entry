@@ -20,52 +20,96 @@ function qtyentry(){
    var tab =ss.getSheetByName('FFS');
    break;
   
+    case 'SH-03':   
+   var tab =ss.getSheetByName("Earthing");
+   break;
+   
    case 'SH-04': 
    var tab =ss.getSheetByName("Cabling");
    break;
-     
+   
+   case 'SH-05':     
+   var tab =ss.getSheetByName("LightningProtection");
+   break; 
+   
+  
+   case 'SH-06':   
+   var tab =ss.getSheetByName("SafetyEquipments");
+   break; 
+   
+   
+   case 'SH-08':     
+   var tab =ss.getSheetByName("UPSInverter");
+   break; 
+   
+   
+   case 'SH-09':     
+   var tab =ss.getSheetByName("Telephone");
+   break; 
+   
+    
+   case 'SH-10': 
+   var tab =ss.getSheetByName("10-FireAlarm");
+   break;
+   
+    
+   case 'SH-11':  
+   var tab =ss.getSheetByName("SurvillanceSecurity");
+   break;
+   
+   
+   case 'SH-12':    
+   var tab =ss.getSheetByName("DataNetworking");
+   break;
+   
+   case 'SH-13':      
+   var tab =ss.getSheetByName("TVSystem");
+   break;
+   
+   
    case 'SH-14': 
    var tab =ss.getSheetByName("Lifts");
    break;
    
-   case 'SH-19': 
-   case 'SH-20':   
-   var tab =ss.getSheetByName("DGsets");
-   break;
+  
    
-   case 'SH-15': 
-   case 'SH-16': 
-   case 'SH-17':
-   case 'SH-18':
-   case 'SH-21': 
-   case 'SH-03':   
+   case 'SH-15':  
    var tab =ss.getSheetByName("Transformers");
    break;   
-  
-   case 'SH-10': 
-   var tab =ss.getSheetByName("10-FireAlarm");
+   
+   case 'SH-16':   
+   var tab =ss.getSheetByName("HTpanels");
+   break;   
+   
+   case 'SH-17':     
+   var tab =ss.getSheetByName("APFCS");
+   break;   
+   
+     
+   case 'SH-18':     
+   var tab =ss.getSheetByName("HTcables");
+   break;
+   
+   case 'SH-21': 
+   var tab =ss.getSheetByName("PLC");
    break;
    
    case 'SH-22': 
    var tab =ss.getSheetByName("Pumping");
    break;   
   
-   case 'SH-05': 
-   case 'SH-06': 
-   case 'SH-08':
-   case 'SH-09':   
-   case 'SH-11':
-   case 'SH-12': 
-   case 'SH-13':    
-   case 'SH-23':   
-   var tab =ss.getSheetByName("Misc");
-   break;  
-   
+      
    case 'SH-19': 
-   case 'SH-20':   
    var tab =ss.getSheetByName("DGsets");
    break;  
-      
+   
+   case 'SH-20':   
+   var tab =ss.getSheetByName("HSDStorage");
+   break;    
+   
+   case 'SH-23':   
+   var tab =ss.getSheetByName("MiscItems");
+   break;
    
    case 'SH-01': 
    var ss1 = SpreadsheetApp.openById("11OKvlghwe_7BaeLapwXRfRrV2utS6QIQUBryv-WD_Ws");
