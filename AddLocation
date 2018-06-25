@@ -1,0 +1,61 @@
+function addLoc() {
+  
+ 
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    var sht = ss.getSheetByName("Dashboard");
+
+  var addLoc = sht.getRange("H4").getValue();  
+
+  //
+
+  if (addLoc!=""){
+  var Ovals = ss.getRange("O3:O").getValues();
+   
+    for(var i=0;i<=Ovals.length;i++){
+      
+      if(Ovals[i]==addLoc){
+       Browser.msgBox( 'Location already exists');
+       sht.getRange("H4").setValue("");
+       sht.getRange("D"+4).activate();
+       sht.getRange("D"+4).setValue(addLoc);
+       break; 
+      }//if
+   
+      
+    
+     if(Ovals[i]==""){
+       var j=i+3;
+       sht.getRange("O"+j).setValue(addLoc);
+       sht.getRange("H4").setValue(""); 
+       Browser.msgBox( 'Location added');
+       sht.getRange("D"+4).activate(); 
+       sht.getRange("D"+4).setValue(addLoc); 
+       break; 
+      }//if
+    
+    }//for
+  }//if
+  else{
+    Browser.msgBox( 'enter location');
+    return;
+  }
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   
+  
+    
+  
+  
