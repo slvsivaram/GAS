@@ -1,0 +1,54 @@
+
+<script>
+function sendForm() {
+  var sh = document.forms[0].elements[0].value;
+  var itemno = document.forms[0].elements[1].value;
+  
+  google.script.run.withSuccessHandler(ready).processForm(sh,itemno);
+  document.getElementById("status").innerHTML = "Processing.."; 
+  
+  
+}
+function ready(data) {
+  document.getElementById("status").innerHTML = "Processed!";
+  
+  document.getElementById("desc").innerHTML = data[0] ;
+  document.getElementById("unit").innerHTML = data[1] ;
+  document.getElementById("qty").innerHTML = data[2] ;
+  document.getElementById("rate").innerHTML = data[3] ;
+  document.getElementById("totqty").innerHTML = data[4] ;
+  document.getElementById("totamt").innerHTML = data[5] ;
+  document.getElementById("raqty").innerHTML = data[6] ;
+  document.getElementById("raamt").innerHTML = data[7] ;
+  document.getElementById("brkup").innerHTML = data[8] ;
+  document.getElementById("loc").innerHTML = data[9] ;
+  document.getElementById("msrmnt").innerHTML = data[10] ;
+  
+   
+}
+</script>
+
+<div id="status">
+<p> </p>
+</div>
+
+
+
+  <form id="form">
+    SH: <input type="text"> <br>
+    Item No: <input type="text">
+ 
+  </form>
+  <button onclick="javascript:sendForm();">Submit</button> <br>
+ 
+<b>Description of Item:</b> <label id="desc">  </label> <br>
+<b>Unit: </b><label id="unit">  </label> <br>
+<b>BoQ Qty: </b><label id="qty">  </label> <br>
+<b>BoQ Rate: </b><label id="rate"> </label> <br>
+<b>Total Qty: </b><label id="totqty">  </label> <br>
+<b>Total Amt: </b> <label id="totamt">  </label> <br>
+<b>RA Qty: </b><label id="raqty">  </label> <br>
+<b>RA Amt: </b><label id="raamt">  </label> <br>
+<b>BoQ Qty Breakup:</b> <label id="brkup">  </label> <br> 
+<b>Location:</b> <label id="loc">  </label> <br>
+<b>Measurement:</b> <label id="msrmnt"> </label> 
