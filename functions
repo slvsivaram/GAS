@@ -1,0 +1,128 @@
+function onOpen(e) {
+  var ui=SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
+    ui.createMenu('SLV')
+     //.addItem('Hiderows', 'hiderows')
+       //.addSubMenu(ui.createMenu('Hiderows')
+          .addItem('Hiderows(Total Qty=0)', 'hiderows')
+          //.addItem('All sheets', 'hiderowsall'))
+       //.addSubMenu(ui.createMenu('UnHiderows')
+          .addItem('UnHiderows', 'unhiderows')
+          //.addItem('All sheets', 'unhiderowsall')) 
+       //.addSubMenu(ui.createMenu('SP Items')
+          .addItem('SP Items', 'spitems')
+          //.addItem('All sheets', 'spitemsall'))
+       //.addItem('UnHiderows', 'unhiderows') 
+          .addItem('statistics', 'stats')
+       .addToUi();  }
+
+function hiderows() {
+   
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var sht = ss.getActiveSheet();
+   
+   var Lrow =  sht.getLastRow();
+   var vals = sht.getRange("H2:H"+Lrow).getValues();
+      for (var i=0;i<vals.length;i++){
+       if (vals[i]=="0")  {
+       sht.hideRows(i+2); }          }  
+
+                    }
+
+
+function hiderowsall() {
+   
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   //var sht = ss.getActiveSheet();
+   
+   var shtnames = ["FireAlarm","DGsets","EI","MVpanels","Misc","FixturesFans","Cabling","Transformers","Pumping","Lifts","FFS","HVAC"];
+   for (var j=0;j<shtnames.length;j++) {
+      var stab=ss.getSheetByName(shtnames[j]);
+      var Lrow =  stab.getLastRow();
+      var vals = stab.getRange("H2:H"+Lrow).getValues();
+      for (var i=0;i<vals.length;i++){
+       if (vals[i]=="0")  {
+       stab.hideRows(i+2);}          } } 
+
+                    }
+
+function unhiderows() {
+   
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var sht = ss.getActiveSheet();
+   
+    
+   
+   var Lrow =  sht.getLastRow();
+  
+   var rng = sht.getRange("H2:H"+Lrow);
+   sht.unhideRow(rng);}
+
+
+function unhiderowsall() {
+   
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   //var sht = ss.getActiveSheet();
+   var shtnames = ["FireAlarm","DGsets","EI","MVpanels","Misc","FixturesFans","Cabling","Transformers","Pumping","Lifts","FFS","HVAC"];
+   for (var j=0;j<shtnames.length;j++) {
+     var stab=ss.getSheetByName(shtnames[j]);
+     var Lrow =  stab.getLastRow();
+  
+     var rng = stab.getRange("H2:H"+Lrow);
+     stab.unhideRow(rng);              }        
+                       }
+function spitems() {
+   
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var sht = ss.getActiveSheet();
+   
+   var Lrow =  sht.getLastRow();
+   var vals = sht.getRange("J2:J"+Lrow).getValues();
+      for (var i=0;i<vals.length;i++){
+       if (vals[i]=="0")  {
+       sht.hideRows(i+2); }          }  
+
+                    }                       
+ function stats() {
+   
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   
+   var sht1 = ss.getSheetByName("PACextra");
+   var count1=0;
+   var Lrow =  sht1.getLastRow();
+   var vals = sht1.getRange("O4:O"+Lrow).getValues();
+      for (var i=0;i<vals.length;i++){
+       if (vals[i]>"0")  {
+       count1=count1+1;   }           }  
+       
+   var sht2 = ss.getSheetByName("PACDevn");
+   var count2=0;
+   var Lrow =  sht2.getLastRow();
+   var vals = sht2.getRange("W4:W"+Lrow).getValues();
+      for (var i=0;i<vals.length;i++){
+       if (vals[i]>"0")  {
+       count2=count2+1;   }           } 
+       
+   var sht3 = ss.getSheetByName("PACsubstitute");
+   var count3=0;
+   var Lrow =  sht3.getLastRow();
+   var vals = sht3.getRange("P3:P"+Lrow).getValues();
+      for (var i=0;i<vals.length;i++){
+       if (vals[i]>"0")  {
+       count3=count3+1;   }           } 
+       
+   var sht4 = ss.getSheetByName("Deviation");
+   var count4=0;
+   var Lrow =  sht4.getLastRow();
+   var vals = sht4.getRange("K3:K"+Lrow).getValues();
+      for (var i=0;i<vals.length;i++){
+       if (vals[i].toString()=="N")  {
+       count4=count4+1;   }           }      
+   
+   var msg1="No of PAC extra items(deviation>100%) ="+count1;
+   var msg2="\n No of PAC deviated items(deviation>100%) ="+count2;
+   var msg3="\n No of PAC substitute items(deviation>100%) ="+count3;
+   var msg4="\n No of deviated items ="+count4;
+   
+   msg=msg1+msg2+msg3+msg4;
+   SpreadsheetApp.getUi().alert(msg);
+                   } 
